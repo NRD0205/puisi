@@ -1,0 +1,59 @@
+/* ============================================
+   App shell styling & scene background gradients
+   ============================================ */
+
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  /* High-quality vertical gradient representing peaceful night sky */
+  background: linear-gradient(
+    to bottom,
+    #020617 0%,    /* ultra deep night */
+    #071a33 35%,   /* moonlight blue */
+    #0b1026 70%,   /* twilight purple shadow */
+    #101b3a 100%   /* soft navy base */
+  );
+  overflow-x: hidden;
+}
+
+/* Background grid / noise pattern overlay (optional, subtle) */
+.app-shell::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.main-content {
+  position: relative;
+  width: 100%;
+  transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1), transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.main-content--hidden {
+  opacity: 0;
+  transform: translateY(30px);
+  pointer-events: none;
+}
+
+.main-content--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* UI Elements visibility transitions */
+.element--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.element--visible {
+  opacity: 1;
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1) 0.5s; /* slight delay for beautiful layering */
+}
+

@@ -1,0 +1,42 @@
+/* ============================================
+   FloatingPetals — Wind-blown flower petals
+   ============================================ */
+
+.floating-petals-container {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-petals);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floating-petal {
+  position: absolute;
+  top: -20px;
+  border-radius: 50% 0 50% 0;
+  opacity: 0;
+  animation: petalFall linear infinite;
+  will-change: transform, opacity;
+  filter: blur(0.5px);
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(50vh) translateX(var(--drift-x, 50px)) rotate(180deg);
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(105vh) translateX(calc(var(--drift-x, 50px) * 0.5)) rotate(var(--rotate-end, 720deg));
+    opacity: 0;
+  }
+}

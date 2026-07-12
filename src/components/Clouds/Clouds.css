@@ -1,0 +1,83 @@
+/* ============================================
+   Clouds — Slow-drifting night clouds
+   ============================================ */
+
+.clouds-container {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-clouds);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* ---- Cloud group ---- */
+.cloud {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  animation: cloudDrift linear infinite;
+  left: -300px;
+}
+
+/* ---- Cloud blobs (combined to form a cloud shape) ---- */
+.cloud-blob {
+  border-radius: 50%;
+  background: rgba(180, 200, 220, 0.06);
+  position: relative;
+}
+
+.cloud-blob--main {
+  width: 180px;
+  height: 60px;
+  border-radius: 60px;
+}
+
+.cloud-blob--left {
+  width: 80px;
+  height: 50px;
+  border-radius: 50%;
+  margin-left: -50px;
+  margin-top: -15px;
+}
+
+.cloud-blob--right {
+  width: 100px;
+  height: 45px;
+  border-radius: 50%;
+  margin-left: -60px;
+  margin-top: 10px;
+}
+
+/* ---- Cloud variants (different sizes) ---- */
+.cloud--1 .cloud-blob--main { width: 200px; height: 55px; }
+.cloud--2 .cloud-blob--main { width: 160px; height: 50px; }
+.cloud--2 .cloud-blob { background: rgba(180, 200, 220, 0.04); }
+.cloud--3 .cloud-blob--main { width: 220px; height: 65px; }
+.cloud--3 .cloud-blob { background: rgba(180, 200, 220, 0.05); }
+.cloud--4 .cloud-blob--main { width: 150px; height: 45px; }
+.cloud--4 .cloud-blob { background: rgba(180, 200, 220, 0.035); }
+.cloud--5 .cloud-blob--main { width: 190px; height: 58px; }
+.cloud--5 .cloud-blob { background: rgba(180, 200, 220, 0.045); }
+
+/* ---- Animation ---- */
+@keyframes cloudDrift {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(100vw + 400px));
+  }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .cloud-blob--main {
+    width: 120px !important;
+    height: 40px !important;
+  }
+  .cloud-blob--left,
+  .cloud-blob--right {
+    width: 60px !important;
+    height: 35px !important;
+  }
+}

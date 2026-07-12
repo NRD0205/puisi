@@ -1,0 +1,175 @@
+/* ============================================
+   Moon — Glowing celestial body
+   ============================================ */
+
+.moon-container {
+  position: fixed;
+  top: 4%;
+  right: 12%;
+  z-index: var(--z-moon);
+  pointer-events: none;
+  animation: moonFloat 8s ease-in-out infinite;
+}
+
+/* ---- Moon Surface ---- */
+.moon-surface {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  position: relative;
+  background: radial-gradient(
+    circle at 35% 35%,
+    #fffef5 0%,
+    #f5eedc 30%,
+    #e8dfc8 60%,
+    #d8ccb0 100%
+  );
+  box-shadow:
+    0 0 20px rgba(255, 252, 240, 0.6),
+    0 0 60px rgba(255, 248, 220, 0.3),
+    0 0 100px rgba(255, 223, 130, 0.15);
+  overflow: hidden;
+}
+
+/* ---- Crater details ---- */
+.moon-crater {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(200, 190, 170, 0.3) 0%,
+    rgba(200, 190, 170, 0.1) 60%,
+    transparent 100%
+  );
+}
+
+.moon-crater--1 {
+  width: 30px;
+  height: 30px;
+  top: 25%;
+  left: 55%;
+}
+
+.moon-crater--2 {
+  width: 18px;
+  height: 18px;
+  top: 55%;
+  left: 30%;
+}
+
+.moon-crater--3 {
+  width: 22px;
+  height: 22px;
+  top: 65%;
+  left: 60%;
+  opacity: 0.6;
+}
+
+/* ---- Glow Layers ---- */
+.moon-glow {
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.moon-glow--inner {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 252, 240, 0.25) 0%,
+    rgba(255, 248, 220, 0.1) 50%,
+    transparent 70%
+  );
+}
+
+.moon-glow--mid {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 248, 220, 0.12) 0%,
+    rgba(255, 223, 130, 0.05) 40%,
+    transparent 70%
+  );
+  animation: glowPulse 6s ease-in-out infinite;
+}
+
+.moon-glow--ambient {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    rgba(147, 180, 220, 0.06) 0%,
+    rgba(123, 164, 204, 0.03) 40%,
+    transparent 70%
+  );
+  animation: glowPulse 8s ease-in-out infinite 1s;
+}
+
+/* ---- Animations ---- */
+@keyframes moonFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .moon-container {
+    top: 3%;
+    right: 8%;
+  }
+  .moon-surface {
+    width: 110px;
+    height: 110px;
+  }
+  .moon-glow--inner {
+    width: 140px;
+    height: 140px;
+  }
+  .moon-glow--mid {
+    width: 240px;
+    height: 240px;
+  }
+  .moon-glow--ambient {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .moon-surface {
+    width: 80px;
+    height: 80px;
+  }
+  .moon-glow--inner {
+    width: 110px;
+    height: 110px;
+  }
+  .moon-glow--mid {
+    width: 180px;
+    height: 180px;
+  }
+  .moon-glow--ambient {
+    width: 300px;
+    height: 300px;
+  }
+}

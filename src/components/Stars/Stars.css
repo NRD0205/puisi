@@ -1,0 +1,53 @@
+/* ============================================
+   Stars — Twinkling star field
+   ============================================ */
+
+.stars-container {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-stars);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--star-white);
+  will-change: opacity, transform;
+}
+
+.star--blue {
+  background: var(--star-blue);
+  box-shadow: 0 0 3px var(--star-blue);
+}
+
+/* Twinkle: fade in/out */
+.star--twinkle {
+  animation: starTwinkle var(--duration, 3s) ease-in-out infinite;
+}
+
+/* Pulse: scale up/down gently */
+.star--pulse {
+  animation: starPulse var(--duration, 4s) ease-in-out infinite;
+}
+
+@keyframes starTwinkle {
+  0%, 100% {
+    opacity: var(--star-opacity, 0.3);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes starPulse {
+  0%, 100% {
+    opacity: var(--star-opacity, 0.4);
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.8);
+  }
+}

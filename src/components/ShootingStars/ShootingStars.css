@@ -1,0 +1,62 @@
+/* ============================================
+   ShootingStars — Streak across the sky
+   ============================================ */
+
+.shooting-stars-container {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-shooting);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.shooting-star {
+  position: absolute;
+  width: var(--length, 100px);
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0.8) 70%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  border-radius: 2px;
+  transform: rotate(var(--angle, 25deg));
+  animation: shootingStar var(--duration, 0.8s) ease-in forwards;
+  box-shadow:
+    0 0 4px rgba(255, 255, 255, 0.6),
+    0 0 12px rgba(168, 216, 255, 0.3);
+}
+
+.shooting-star::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: white;
+  box-shadow:
+    0 0 6px white,
+    0 0 15px rgba(168, 216, 255, 0.8);
+}
+
+@keyframes shootingStar {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--angle, 25deg)) translateX(0);
+  }
+  10% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--angle, 25deg)) translateX(300px);
+  }
+}

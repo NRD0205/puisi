@@ -1,0 +1,169 @@
+/* ============================================
+   IntroOverlay — Elegant landing/entrance screen
+   ============================================ */
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100; /* Over everything initially */
+  background: radial-gradient(
+    circle at 50% 40%,
+    rgba(7, 26, 51, 0.95) 0%,
+    rgba(2, 6, 23, 0.98) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  transition: opacity 1s var(--ease-smooth), visibility 1s var(--ease-smooth);
+}
+
+.intro-overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* ---- Card container ---- */
+.intro-card {
+  position: relative;
+  max-width: 450px;
+  width: 90%;
+  padding: 40px 30px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.4),
+    0 0 50px rgba(123, 164, 204, 0.03);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Ambient glow */
+.intro-card__glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(
+    circle,
+    rgba(147, 180, 220, 0.15) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+  animation: introGlowPulse 4s ease-in-out infinite;
+}
+
+@keyframes introGlowPulse {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+}
+
+/* ---- Button ---- */
+.intro-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  z-index: 2;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.intro-icon-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transition: all 0.5s var(--ease-smooth);
+  animation: floatIcon 3s ease-in-out infinite;
+}
+
+.intro-button:hover .intro-icon-wrapper {
+  transform: scale(1.08) translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.35),
+    0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.message-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--moon-white);
+  transition: transform 0.5s var(--ease-smooth);
+}
+
+.intro-button:hover .message-icon {
+  transform: rotate(5deg) scale(1.05);
+}
+
+/* Pulsing outer ring */
+.icon-pulse-ring {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  animation: iconPulseRing 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes iconPulseRing {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ---- Typography ---- */
+.intro-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  z-index: 1;
+}
+
+.intro-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  z-index: 1;
+  max-width: 300px;
+}
+
+.intro-prompt {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent-moonblue);
+  animation: promptFade 2s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes promptFade {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}

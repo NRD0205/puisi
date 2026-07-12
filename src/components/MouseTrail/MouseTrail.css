@@ -1,0 +1,10 @@
+/* ============================================
+   MouseTrail — Canvas overlay for cursor effects
+   ============================================ */
+
+.mouse-trail-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-mouse-trail);
+  pointer-events: none; /* Let clicks pass through */
+}

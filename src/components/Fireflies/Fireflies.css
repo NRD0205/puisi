@@ -1,0 +1,60 @@
+/* ============================================
+   Fireflies — Magical wandering glow dots
+   ============================================ */
+
+.fireflies-container {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-fireflies);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.firefly {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 240, 150, 0.9) 0%,
+    rgba(255, 230, 100, 0.5) 40%,
+    transparent 70%
+  );
+  box-shadow:
+    0 0 6px rgba(255, 240, 150, 0.8),
+    0 0 15px rgba(255, 230, 100, 0.4),
+    0 0 30px rgba(255, 220, 80, 0.15);
+  animation:
+    fireflyDrift var(--drift-duration, 8s) ease-in-out infinite,
+    fireflyGlow var(--glow-duration, 3s) ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes fireflyDrift {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(var(--drift-x, 20px), var(--drift-y, -15px));
+  }
+  50% {
+    transform: translate(var(--drift-x2, -30px), var(--drift-y2, 10px));
+  }
+  75% {
+    transform: translate(
+      calc(var(--drift-x, 20px) * -0.5),
+      calc(var(--drift-y, -15px) * -0.7)
+    );
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes fireflyGlow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}

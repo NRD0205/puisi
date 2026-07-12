@@ -1,0 +1,243 @@
+/* ============================================
+   FlowerField — Bottom meadow with flowers & grass
+   ============================================ */
+
+.flower-field {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  z-index: var(--z-flowers);
+  pointer-events: none;
+}
+
+/* ---- Ground fog overlay ---- */
+.flower-field__fog {
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(
+    to top,
+    rgba(7, 26, 51, 0.6) 0%,
+    rgba(7, 26, 51, 0.3) 30%,
+    transparent 100%
+  );
+  z-index: 1;
+  animation: fogPulse 10s ease-in-out infinite;
+}
+
+@keyframes fogPulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* ---- Ground surface ---- */
+.flower-field__ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(
+    to top,
+    #061208 0%,
+    #0a2010 40%,
+    #0d2a15 70%,
+    rgba(13, 42, 21, 0) 100%
+  );
+  z-index: 2;
+}
+
+/* ---- Grass blades ---- */
+.flower-field__grass {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  z-index: 3;
+}
+
+.grass-blade {
+  position: absolute;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to top,
+    #1a4d1a 0%,
+    #2d7a2d 50%,
+    #3a8f3a 100%
+  );
+  transform-origin: bottom center;
+  animation: grassSway ease-in-out infinite;
+  border-radius: 1px 1px 0 0;
+  opacity: 0.7;
+}
+
+@keyframes grassSway {
+  0%, 100% {
+    transform: skewX(var(--skew, 0deg)) rotate(0deg);
+  }
+  50% {
+    transform: skewX(var(--skew, 0deg)) rotate(3deg);
+  }
+}
+
+/* ---- Flowers container ---- */
+.flower-field__flowers {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  height: 120px;
+  z-index: 4;
+}
+
+/* ---- Individual flower ---- */
+.flower {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: flowerSway ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.flower__stem {
+  width: 2px;
+  height: var(--stem-height, 40px);
+  background: linear-gradient(to top, #1a5c1a, #2d7a2d);
+  border-radius: 1px;
+}
+
+.flower__head {
+  position: relative;
+  width: calc(var(--flower-size, 12px) * 2);
+  height: calc(var(--flower-size, 12px) * 2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- Daisy type ---- */
+.petal {
+  position: absolute;
+  width: var(--flower-size, 12px);
+  height: calc(var(--flower-size, 12px) * 0.4);
+  background: var(--flower-color, white);
+  border-radius: 50%;
+  transform-origin: center;
+  opacity: 0.85;
+}
+
+.petal--1 { transform: rotate(0deg) translateX(calc(var(--flower-size, 12px) * 0.5)); }
+.petal--2 { transform: rotate(72deg) translateX(calc(var(--flower-size, 12px) * 0.5)); }
+.petal--3 { transform: rotate(144deg) translateX(calc(var(--flower-size, 12px) * 0.5)); }
+.petal--4 { transform: rotate(216deg) translateX(calc(var(--flower-size, 12px) * 0.5)); }
+.petal--5 { transform: rotate(288deg) translateX(calc(var(--flower-size, 12px) * 0.5)); }
+
+.flower__center {
+  width: calc(var(--flower-size, 12px) * 0.4);
+  height: calc(var(--flower-size, 12px) * 0.4);
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffd700 0%, #daa520 100%);
+  z-index: 1;
+}
+
+/* ---- Tulip type ---- */
+.tulip-cup {
+  width: var(--flower-size, 12px);
+  height: calc(var(--flower-size, 12px) * 1.2);
+  background: var(--flower-color, #f4a0b5);
+  border-radius: 50% 50% 45% 45%;
+  opacity: 0.8;
+  box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* ---- Simple 4-petal type ---- */
+.simple-petal {
+  position: absolute;
+  width: calc(var(--flower-size, 12px) * 0.5);
+  height: calc(var(--flower-size, 12px) * 0.5);
+  background: var(--flower-color, white);
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+.simple-petal--1 { transform: translate(-50%, -50%); }
+.simple-petal--2 { transform: translate(50%, -50%); }
+.simple-petal--3 { transform: translate(-50%, 50%); }
+.simple-petal--4 { transform: translate(50%, 50%); }
+
+/* ---- Bell type ---- */
+.bell-shape {
+  width: calc(var(--flower-size, 12px) * 0.8);
+  height: var(--flower-size, 12px);
+  background: var(--flower-color, #c4a8e0);
+  border-radius: 40% 40% 50% 50%;
+  opacity: 0.8;
+}
+
+/* ---- Star type ---- */
+.star-shape {
+  width: var(--flower-size, 12px);
+  height: var(--flower-size, 12px);
+  background: var(--flower-color, #a0c8f0);
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  opacity: 0.8;
+}
+
+/* ---- Flower sway animation ---- */
+@keyframes flowerSway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(2deg);
+  }
+  75% {
+    transform: rotate(-2deg);
+  }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .flower-field {
+    height: 140px;
+  }
+  .flower-field__fog {
+    height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .flower-field {
+    height: 110px;
+  }
+  .flower-field__ground {
+    height: 40px;
+  }
+  .flower-field__grass {
+    bottom: 20px;
+    height: 50px;
+  }
+  .flower-field__flowers {
+    bottom: 20px;
+    height: 80px;
+  }
+}
